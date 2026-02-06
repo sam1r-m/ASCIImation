@@ -1,4 +1,4 @@
-// render loop: decodes current video frame -> pipeline -> canvas
+// main render loop: video frame -> pipeline -> canvas
 
 'use client'
 

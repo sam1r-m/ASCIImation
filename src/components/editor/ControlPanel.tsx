@@ -18,12 +18,17 @@ interface ControlPanelProps {
   onSeek: (time: number) => void
   onExportGif: () => void
   onExportWebm: () => void
+  onExportMp4: () => void
+  onExportHtml: () => void
   canWebm: boolean
+  canMp4: boolean
 }
 
 export function ControlPanel({
   meta, isPlaying, currentTime,
-  onTogglePlayback, onSeek, onExportGif, onExportWebm, canWebm,
+  onTogglePlayback, onSeek,
+  onExportGif, onExportWebm, onExportMp4, onExportHtml,
+  canWebm, canMp4,
 }: ControlPanelProps) {
   return (
     <aside className="w-[300px] shrink-0 h-full overflow-y-auto custom-scrollbar glass rounded-2xl p-4">
@@ -63,7 +68,10 @@ export function ControlPanel({
         <ExportSection
           onExportGif={onExportGif}
           onExportWebm={onExportWebm}
+          onExportMp4={onExportMp4}
+          onExportHtml={onExportHtml}
           canWebm={canWebm}
+          canMp4={canMp4}
         />
       </Accordion>
     </aside>

@@ -1,4 +1,4 @@
-// manages video loading, playback, and frame access
+// video loading + playback
 
 'use client'
 

@@ -5,7 +5,7 @@
   --font-mono: var(--font-geist-mono), ui-monospace, "Courier New", monospace;
 }
 
-/* ─── scrollbar ───────────────────────────────── */
+/* scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
@@ -20,7 +20,7 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ─── range slider ────────────────────────────── */
+/* range input */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -65,7 +65,7 @@ input[type="range"]::-moz-range-thumb {
   border: none;
 }
 
-/* ─── vignette ────────────────────────────────── */
+/* vignette */
 .vignette {
   pointer-events: none;
   background: radial-gradient(
@@ -75,7 +75,7 @@ input[type="range"]::-moz-range-thumb {
   );
 }
 
-/* ─── noise / grain overlay ───────────────────── */
+/* noise / grain */
 .noise-overlay {
   pointer-events: none;
   opacity: 0.04;
@@ -84,7 +84,7 @@ input[type="range"]::-moz-range-thumb {
   background-size: 256px 256px;
 }
 
-/* ─── liquid glass panel ──────────────────────── */
+/* glass panel */
 .glass {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(16px) saturate(120%);
@@ -107,7 +107,7 @@ input[type="range"]::-moz-range-thumb {
   pointer-events: none;
 }
 
-/* ─── liquid glass primary button ─────────────── */
+/* glass button - primary */
 .glass-button-primary {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px) saturate(120%);
@@ -149,7 +149,7 @@ input[type="range"]::-moz-range-thumb {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* ─── liquid glass secondary button ───────────── */
+/* glass button - secondary */
 .glass-button {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(8px);
@@ -181,7 +181,7 @@ input[type="range"]::-moz-range-thumb {
   background: rgba(255, 255, 255, 0.04);
 }
 
-/* ─── modal ───────────────────────────────────── */
+/* modal */
 .modal-backdrop {
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
@@ -214,7 +214,6 @@ input[type="range"]::-moz-range-thumb {
   pointer-events: none;
 }
 
-/* ─── reduced motion ──────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   .glass-button-primary,
   .glass-button {

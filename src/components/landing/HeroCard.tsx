@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
 
+// box-drawing ascii art for the hero
 const ASCII_TITLE = [
   '╔═╗ ╔═╗ ╔═╗  ╦   ╦      ╔╦╗ ╔═╗ ╔╦╗  ╦  ╔═╗ ╔╗╔',
   '╠═╣ ╚═╗ ║    ║   ║   ─  ║║║ ╠═╣  ║   ║  ║ ║ ║║║',
@@ -34,7 +35,7 @@ export function HeroCard() {
       }}
       className="relative z-10 flex flex-col items-center text-center px-6"
     >
-      {/* ASCII art title — subtle shimmer */}
+      {/* ascii art */}
       <motion.pre
         animate={shouldReduceMotion ? {} : { opacity: [0.25, 0.4, 0.25] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
@@ -44,17 +45,15 @@ export function HeroCard() {
         {ASCII_TITLE}
       </motion.pre>
 
-      {/* Clean title */}
       <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-3">
-        ascii-mator
+        ascii-mation
       </h1>
 
-      {/* Tracked subtitle */}
       <p className="text-zinc-400 text-base md:text-lg tracking-[0.08em] mb-12">
         real-time video → ascii
       </p>
 
-      {/* CTA — liquid glass pill */}
+      {/* cta */}
       <motion.button
         onClick={handleOpen}
         disabled={exiting}

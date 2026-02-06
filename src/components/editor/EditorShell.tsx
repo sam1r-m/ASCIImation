@@ -6,7 +6,7 @@ import { useVideoDecoder } from '@/hooks/useVideoDecoder'
 import { useAsciiPipeline } from '@/hooks/useAsciiPipeline'
 import { useExport } from '@/hooks/useExport'
 import { useEditorStore } from '@/store/settings'
-import { canExportWebm } from '@/lib/export/video'
+import { canExportWebm, canExportMp4 } from '@/lib/export/video'
 import { ControlPanel } from './ControlPanel'
 import { PreviewCanvas } from './PreviewCanvas'
 import { ConfirmModal } from './ConfirmModal'
@@ -23,13 +23,13 @@ export function EditorShell() {
   } = useVideoDecoder()
 
   const { collectFrames } = useAsciiPipeline(videoEl, canvasRef)
-  const { doExportGif, doExportWebm } = useExport(collectFrames)
+  const { doExportGif, doExportWebm, doExportMp4, doExportHtml } = useExport(collectFrames)
   const storeReset = useEditorStore((s) => s.reset)
 
   const handleFileChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) loadFile(file)
-    // allow re-selecting the same file
+    // let the user re-select the same file
     e.target.value = ''
   }, [loadFile])
 
@@ -37,7 +37,7 @@ export function EditorShell() {
     resetVideo()
     storeReset()
     setShowResetModal(false)
-    // clear canvas
+    // wipe the canvas
     const canvas = canvasRef.current
     if (canvas) {
       const ctx = canvas.getContext('2d')
@@ -53,7 +53,6 @@ export function EditorShell() {
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
         className="relative flex gap-4 h-screen p-4"
       >
-        {/* hidden file input */}
         <input
           ref={fileInputRef}
           type="file"
@@ -62,7 +61,7 @@ export function EditorShell() {
           className="hidden"
         />
 
-        {/* top-right button cluster */}
+        {/* top right controls */}
         <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
           {error && (
             <span className="text-xs text-red-400 mr-2">{error}</span>
@@ -93,12 +92,15 @@ export function EditorShell() {
           onSeek={seek}
           onExportGif={doExportGif}
           onExportWebm={doExportWebm}
+          onExportMp4={doExportMp4}
+          onExportHtml={doExportHtml}
           canWebm={canExportWebm()}
+          canMp4={canExportMp4()}
         />
         <PreviewCanvas canvasRef={canvasRef} hasVideo={!!videoEl} />
       </motion.div>
 
-      {/* restart confirmation modal */}
+      {/* reset modal */}
       <ConfirmModal
         open={showResetModal}
         title="start over?"

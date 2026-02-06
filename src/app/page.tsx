@@ -9,10 +9,10 @@ export default function LandingPage() {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-950 to-black">
-      {/* layer 1 — vignette */}
+      {/* vignette */}
       <div className="absolute inset-0 z-[1] vignette" />
 
-      {/* layer 2 — animated ascii canvas */}
+      {/* ascii bg */}
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -22,10 +22,10 @@ export default function LandingPage() {
         <AsciiBackground />
       </motion.div>
 
-      {/* layer 3 — grain / noise */}
+      {/* noise */}
       <div className="absolute inset-0 z-[3] noise-overlay" />
 
-      {/* layer 4 — hero content */}
+      {/* hero */}
       <HeroCard />
     </main>
   )

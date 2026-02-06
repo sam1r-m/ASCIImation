@@ -1,5 +1,4 @@
 // gif export using gifenc
-// renders ascii frames to an offscreen canvas, quantizes, and encodes
 
 import { GIFEncoder, quantize, applyPalette } from 'gifenc'
 import type { AsciiFrame } from '@/lib/ascii/types'

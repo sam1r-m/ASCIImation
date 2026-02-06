@@ -1,4 +1,4 @@
-// zustand store for all editor settings + stats
+// editor settings store (zustand + localstorage)
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -101,7 +101,7 @@ export const useEditorStore = create<EditorStore>()(
       reset: () => set({ ...defaults }),
     }),
     {
-      name: 'ascii-mator-settings',
+      name: 'ascii-mation-settings',
       // only persist the settings, not runtime state
       partialize: (state) => {
         const { stats, isExporting, exportProgress, ...settings } = state

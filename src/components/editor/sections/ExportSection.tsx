@@ -6,10 +6,15 @@ import { Slider } from '@/components/ui/Slider'
 interface ExportSectionProps {
   onExportGif: () => void
   onExportWebm: () => void
+  onExportMp4: () => void
+  onExportHtml: () => void
   canWebm: boolean
+  canMp4: boolean
 }
 
-export function ExportSection({ onExportGif, onExportWebm, canWebm }: ExportSectionProps) {
+export function ExportSection({
+  onExportGif, onExportWebm, onExportMp4, onExportHtml, canWebm, canMp4,
+}: ExportSectionProps) {
   const { exportFps, exportDuration, isExporting, exportProgress, set } = useEditorStore()
 
   return (
@@ -30,21 +35,38 @@ export function ExportSection({ onExportGif, onExportWebm, canWebm }: ExportSect
         onChange={(v) => set('exportDuration', v)}
       />
 
-      <div className="flex gap-2">
+      {/* video formats */}
+      <div className="grid grid-cols-2 gap-2">
         <button
           onClick={onExportGif}
           disabled={isExporting}
-          className="flex-1 glass-button px-4 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
         >
-          export GIF
+          GIF
         </button>
         <button
           onClick={onExportWebm}
           disabled={isExporting || !canWebm}
-          className="flex-1 glass-button px-4 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
-          title={canWebm ? '' : 'WebM recording not supported in this browser'}
+          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          title={canWebm ? '' : 'not supported in this browser'}
         >
-          export WebM
+          WebM
+        </button>
+        <button
+          onClick={onExportMp4}
+          disabled={isExporting || !canMp4}
+          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          title={canMp4 ? '' : 'not supported in this browser'}
+        >
+          MP4
+        </button>
+        <button
+          onClick={onExportHtml}
+          disabled={isExporting}
+          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          title="downloads frames.js + animation.html"
+        >
+          HTML+JS
         </button>
       </div>
 
@@ -62,10 +84,9 @@ export function ExportSection({ onExportGif, onExportWebm, canWebm }: ExportSect
         </div>
       )}
 
-      {!canWebm && (
+      {(!canWebm || !canMp4) && (
         <p className="text-xs text-zinc-600">
-          WebM not available — your browser doesn&apos;t support MediaRecorder with WebM.
-          MP4 export isn&apos;t possible client-side without ffmpeg.
+          some formats need MediaRecorder support — greyed out ones aren&apos;t available in your browser
         </p>
       )}
     </div>

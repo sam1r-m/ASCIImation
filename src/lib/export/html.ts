@@ -1,0 +1,122 @@
+// html + js export — standalone ascii player
+
+import type { AsciiFrame } from '@/lib/ascii/types'
+
+export interface HtmlExportOptions {
+  frames: AsciiFrame[]
+  fps: number
+}
+
+function buildFramesJs(frames: AsciiFrame[], fps: number): string {
+  const frameStrings = frames.map(f => f.lines.join('\n'))
+  // escape stuff that would break template literals
+  const escaped = frameStrings.map(s =>
+    s.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$')
+  )
+
+  let js = `const fps = ${fps};\n`
+  js += `const frames = [\n`
+  for (const frame of escaped) {
+    js += `\`${frame}\`,\n`
+  }
+  js += `];\n`
+  return js
+}
+
+function buildAnimationHtml(): string {
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ascii-mation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0f;
+      color: #d4d4d8;
+      font-family: 'Courier New', monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 16px;
+      padding: 24px;
+    }
+    #ascii-art {
+      white-space: pre;
+      font-size: 12px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+    .controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    button {
+      background: rgba(255,255,255,0.08);
+      color: #d4d4d8;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+    }
+    button:hover { background: rgba(255,255,255,0.12); }
+    .info { color: #71717a; font-size: 11px; }
+  </style>
+</head>
+<body>
+  <pre id="ascii-art"></pre>
+  <div class="controls">
+    <button id="playBtn">play</button>
+    <span class="info" id="frameInfo">0 / 0</span>
+  </div>
+  <script src="frames.js"></script>
+  <script>
+    let isPlaying = false;
+    let currentFrame = 0;
+    let animationInterval;
+
+    const asciiArt = document.getElementById('ascii-art');
+    const playBtn = document.getElementById('playBtn');
+    const frameInfo = document.getElementById('frameInfo');
+
+    function displayFrame(index) {
+      asciiArt.textContent = frames[index];
+      frameInfo.textContent = (index + 1) + ' / ' + frames.length;
+    }
+
+    function togglePlayback() {
+      if (isPlaying) {
+        clearInterval(animationInterval);
+        playBtn.textContent = 'play';
+      } else {
+        animationInterval = setInterval(function() {
+          currentFrame = (currentFrame + 1) % frames.length;
+          displayFrame(currentFrame);
+        }, 1000 / fps);
+        playBtn.textContent = 'pause';
+      }
+      isPlaying = !isPlaying;
+    }
+
+    playBtn.addEventListener('click', togglePlayback);
+
+    if (frames.length > 0) {
+      displayFrame(0);
+    }
+  </script>
+</body>
+</html>`
+}
+
+export function exportHtml(opts: HtmlExportOptions): { framesJs: string; animationHtml: string } {
+  return {
+    framesJs: buildFramesJs(opts.frames, opts.fps),
+    animationHtml: buildAnimationHtml(),
+  }
+}

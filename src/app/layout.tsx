@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'ascii-mator',
+  title: 'ascii-mation',
   description: 'turn video into ascii motion.',
 }
 

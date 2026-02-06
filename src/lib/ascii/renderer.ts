@@ -1,4 +1,4 @@
-// render an AsciiFrame to a canvas using fillText
+// renders ascii frames to canvas via fillText
 
 import type { AsciiFrame } from './types'
 
