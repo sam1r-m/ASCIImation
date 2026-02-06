@@ -11,9 +11,7 @@ import { ExportSection } from './sections/ExportSection'
 import type { VideoMeta } from '@/lib/ascii/types'
 
 interface ControlPanelProps {
-  onFileSelect: (file: File) => void
   meta: VideoMeta | null
-  videoError: string | null
   isPlaying: boolean
   currentTime: number
   onTogglePlayback: () => void
@@ -24,7 +22,7 @@ interface ControlPanelProps {
 }
 
 export function ControlPanel({
-  onFileSelect, meta, videoError, isPlaying, currentTime,
+  meta, isPlaying, currentTime,
   onTogglePlayback, onSeek, onExportGif, onExportWebm, canWebm,
 }: ControlPanelProps) {
   return (
@@ -33,17 +31,17 @@ export function ControlPanel({
         <PresetsSection />
       </Accordion>
 
-      <Accordion title="Input" defaultOpen>
-        <InputSection
-          onFileSelect={onFileSelect}
-          meta={meta}
-          error={videoError}
-          isPlaying={isPlaying}
-          currentTime={currentTime}
-          onTogglePlayback={onTogglePlayback}
-          onSeek={onSeek}
-        />
-      </Accordion>
+      {meta && (
+        <Accordion title="Playback" defaultOpen>
+          <InputSection
+            meta={meta}
+            isPlaying={isPlaying}
+            currentTime={currentTime}
+            onTogglePlayback={onTogglePlayback}
+            onSeek={onSeek}
+          />
+        </Accordion>
+      )}
 
       <Accordion title="Geometry" defaultOpen>
         <GeometrySection />

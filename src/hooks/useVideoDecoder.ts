@@ -95,6 +95,23 @@ export function useVideoDecoder() {
     }
   }, [])
 
+  const resetVideo = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.ontimeupdate = null
+      videoRef.current.src = ''
+      videoRef.current = null
+    }
+    if (urlRef.current) {
+      URL.revokeObjectURL(urlRef.current)
+      urlRef.current = null
+    }
+    setMeta(null)
+    setIsPlaying(false)
+    setError(null)
+    setCurrentTime(0)
+  }, [])
+
   return {
     videoEl: videoRef.current,
     meta,
@@ -106,5 +123,6 @@ export function useVideoDecoder() {
     pause,
     togglePlayback,
     seek,
+    resetVideo,
   }
 }

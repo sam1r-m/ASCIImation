@@ -34,14 +34,14 @@ export function ExportSection({ onExportGif, onExportWebm, canWebm }: ExportSect
         <button
           onClick={onExportGif}
           disabled={isExporting}
-          className="flex-1 px-4 py-2 text-xs font-medium rounded-xl bg-white/10 border border-white/10 text-zinc-200 hover:bg-white/15 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="flex-1 glass-button px-4 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           export GIF
         </button>
         <button
           onClick={onExportWebm}
           disabled={isExporting || !canWebm}
-          className="flex-1 px-4 py-2 text-xs font-medium rounded-xl bg-white/10 border border-white/10 text-zinc-200 hover:bg-white/15 transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="flex-1 glass-button px-4 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           title={canWebm ? '' : 'WebM recording not supported in this browser'}
         >
           export WebM

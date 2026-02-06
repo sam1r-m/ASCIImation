@@ -38,10 +38,14 @@ export function PreviewCanvas({ canvasRef, hasVideo }: PreviewCanvasProps) {
       />
       {!hasVideo && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <p className="text-zinc-600 text-sm">upload a video to start</p>
+          <p className="text-zinc-600 text-sm">load a video to get started</p>
         </div>
       )}
       <StatsHud />
+      {/* debug watermark */}
+      <span className="absolute bottom-3 left-3 text-[10px] font-mono text-zinc-700/40 select-none pointer-events-none">
+        powered by canvas + ascii
+      </span>
     </div>
   )
 }
