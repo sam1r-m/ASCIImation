@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, useCallback } from 'react'
+import { useRef, useState, useCallback, useEffect } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useVideoDecoder } from '@/hooks/useVideoDecoder'
 import { useAsciiPipeline } from '@/hooks/useAsciiPipeline'
@@ -16,6 +16,11 @@ export function EditorShell() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const shouldReduceMotion = useReducedMotion()
   const [showResetModal, setShowResetModal] = useState(false)
+  // Resolve only on client to avoid hydration mismatch (MediaRecorder is undefined on server)
+  const [exportCapabilities, setExportCapabilities] = useState({ canWebm: false, canMp4: false })
+  useEffect(() => {
+    setExportCapabilities({ canWebm: canExportWebm(), canMp4: canExportMp4() })
+  }, [])
 
   const {
     videoEl, meta, isPlaying, error, currentTime,
@@ -94,8 +99,8 @@ export function EditorShell() {
           onExportWebm={doExportWebm}
           onExportMp4={doExportMp4}
           onExportHtml={doExportHtml}
-          canWebm={canExportWebm()}
-          canMp4={canExportMp4()}
+          canWebm={exportCapabilities.canWebm}
+          canMp4={exportCapabilities.canMp4}
         />
         <PreviewCanvas canvasRef={canvasRef} hasVideo={!!videoEl} />
       </motion.div>
