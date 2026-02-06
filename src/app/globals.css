@@ -174,15 +174,23 @@ input[type="range"]::-moz-range-thumb:active {
   pointer-events: none;
 }
 
-/* card-style buttons (inspired by frosted card + sweep shine, dark theme) */
+/* card-style buttons — 3D raised/pressed with ascii blue */
 .glass-button-primary {
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(10.5px);
   -webkit-backdrop-filter: blur(10.5px);
   border: 1px solid rgba(255, 255, 255, 0.34);
-  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 4px 0 rgba(0, 0, 0, 0.15),
+    0 6px 12px rgba(0, 0, 0, 0.25);
   position: relative;
   overflow: hidden;
+  transition:
+    background 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-button-primary::after {
@@ -201,14 +209,23 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .glass-button-primary:hover {
-  background: rgba(255, 255, 255, 0.11);
-  border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: inset 2px 1px 8px rgba(255, 255, 255, 0.28);
+  background: rgba(2, 74, 130, 0.25);
+  border-color: rgba(2, 56, 98, 0.9);
+  box-shadow:
+    inset 0 1px 0 rgba(28, 109, 172, 0.35),
+    0 4px 0 rgba(2, 56, 98, 0.3),
+    0 6px 20px rgba(2, 56, 98, 0.45),
+    0 0 30px rgba(3, 93, 163, 0.25);
 }
 
 .glass-button-primary:active {
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 2px 1px 4px rgba(255, 255, 255, 0.12);
+  background: rgba(2, 56, 98, 0.4);
+  border-color: rgba(2, 56, 98, 0.95);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(2, 56, 98, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(2px) scale(0.99);
 }
 
 /* secondary */
@@ -217,9 +234,17 @@ input[type="range"]::-moz-range-thumb:active {
   backdrop-filter: blur(10.5px);
   -webkit-backdrop-filter: blur(10.5px);
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 3px 0 rgba(0, 0, 0, 0.12),
+    0 5px 10px rgba(0, 0, 0, 0.2);
   position: relative;
   overflow: hidden;
+  transition:
+    background 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-button::after {
@@ -238,14 +263,96 @@ input[type="range"]::-moz-range-thumb:active {
 }
 
 .glass-button:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.18);
+  background: rgba(2, 74, 130, 0.2);
+  border-color: rgba(2, 56, 98, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(28, 109, 172, 0.25),
+    0 3px 0 rgba(2, 56, 98, 0.25),
+    0 5px 16px rgba(2, 56, 98, 0.35),
+    0 0 24px rgba(3, 93, 163, 0.2);
 }
 
 .glass-button:active {
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 2px 1px 4px rgba(255, 255, 255, 0.08);
+  background: rgba(2, 56, 98, 0.35);
+  border-color: rgba(2, 56, 98, 0.85);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(2, 56, 98, 0.25),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+  transform: translateY(2px) scale(0.99);
+}
+
+/* export format buttons — brand color hover/active (tighter glow so it doesn’t clip in panel) */
+.glass-button.export-gif:hover {
+  background: rgba(232, 76, 139, 0.25);
+  border-color: rgba(212, 39, 119, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 150, 200, 0.3),
+    0 3px 0 rgba(180, 40, 100, 0.35),
+    0 4px 10px rgba(232, 76, 139, 0.35),
+    0 0 12px rgba(232, 76, 139, 0.22);
+}
+.glass-button.export-gif:active {
+  background: rgba(180, 40, 100, 0.4);
+  border-color: rgba(212, 39, 119, 0.95);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(232, 76, 139, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.glass-button.export-webm:hover {
+  background: rgba(0, 200, 83, 0.2);
+  border-color: rgba(0, 150, 60, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(100, 220, 150, 0.3),
+    0 3px 0 rgba(0, 150, 60, 0.35),
+    0 4px 10px rgba(0, 200, 83, 0.35),
+    0 0 12px rgba(0, 200, 83, 0.22);
+}
+.glass-button.export-webm:active {
+  background: rgba(0, 150, 60, 0.4);
+  border-color: rgba(0, 150, 60, 0.95);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(0, 200, 83, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.glass-button.export-mp4:hover {
+  background: rgba(0, 122, 255, 0.2);
+  border-color: rgba(0, 90, 200, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(100, 170, 255, 0.3),
+    0 3px 0 rgba(0, 90, 200, 0.35),
+    0 4px 10px rgba(0, 122, 255, 0.35),
+    0 0 12px rgba(0, 122, 255, 0.22);
+}
+.glass-button.export-mp4:active {
+  background: rgba(0, 90, 200, 0.4);
+  border-color: rgba(0, 90, 200, 0.95);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(0, 122, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.glass-button.export-html:hover {
+  background: rgba(227, 79, 38, 0.2);
+  border-color: rgba(200, 60, 30, 0.85);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 150, 120, 0.3),
+    0 3px 0 rgba(180, 50, 25, 0.35),
+    0 4px 10px rgba(227, 79, 38, 0.35),
+    0 0 12px rgba(227, 79, 38, 0.22);
+}
+.glass-button.export-html:active {
+  background: rgba(180, 50, 25, 0.4);
+  border-color: rgba(200, 60, 30, 0.95);
+  box-shadow:
+    inset 0 2px 6px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(227, 79, 38, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes button-shine {

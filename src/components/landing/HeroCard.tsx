@@ -70,7 +70,7 @@ export function HeroCard() {
 
       <div className="mt-10">
         <a
-          href="https://github.com"
+          href="https://github.com/sam1r-m/ASCIImation"
           target="_blank"
           rel="noopener noreferrer"
           className="text-[11px] text-zinc-600 hover:text-zinc-400 transition-colors tracking-[0.15em] uppercase"

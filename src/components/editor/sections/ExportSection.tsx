@@ -35,19 +35,19 @@ export function ExportSection({
         onChange={(v) => set('exportDuration', v)}
       />
 
-      {/* video formats */}
+      {/* video formats — each uses its format's brand color when you hover over it */}
       <div className="grid grid-cols-2 gap-2">
         <button
           onClick={onExportGif}
           disabled={isExporting}
-          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="glass-button export-gif px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           GIF
         </button>
         <button
           onClick={onExportWebm}
           disabled={isExporting || !canWebm}
-          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="glass-button export-webm px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           title={canWebm ? '' : 'Not supported in this browser'}
         >
           WebM
@@ -55,7 +55,7 @@ export function ExportSection({
         <button
           onClick={onExportMp4}
           disabled={isExporting || !canMp4}
-          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="glass-button export-mp4 px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           title={canMp4 ? '' : 'Not supported in this browser'}
         >
           MP4
@@ -63,7 +63,7 @@ export function ExportSection({
         <button
           onClick={onExportHtml}
           disabled={isExporting}
-          className="glass-button px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+          className="glass-button export-html px-3 py-2 text-xs font-medium rounded-xl text-zinc-200 transition-all duration-150 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
           title="Downloads frames.js + animation.html"
         >
           HTML+JS
