@@ -24,14 +24,14 @@ export function DitherColorSection() {
   return (
     <div className="space-y-3">
       <Select
-        label="dithering"
+        label="Dithering"
         value={dither}
         options={DITHER_OPTIONS}
         onChange={(v) => set('dither', v as DitherMode)}
       />
 
       <div className="flex items-center justify-between">
-        <span className="text-xs text-zinc-400">color mode</span>
+        <span className="text-xs text-zinc-400">Color mode</span>
         <button
           onClick={() => set('colorEnabled', !colorEnabled)}
           className={`
@@ -40,7 +40,7 @@ export function DitherColorSection() {
           `}
           role="switch"
           aria-checked={colorEnabled}
-          aria-label="color mode"
+          aria-label="Color mode"
         >
           <span className={`
             absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform duration-200
@@ -52,7 +52,7 @@ export function DitherColorSection() {
       {colorEnabled && (
         <>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400">palette mode</span>
+            <span className="text-xs text-zinc-400">Palette mode</span>
             <button
               onClick={() => set('paletteMode', !paletteMode)}
               className={`
@@ -61,7 +61,7 @@ export function DitherColorSection() {
               `}
               role="switch"
               aria-checked={paletteMode}
-              aria-label="palette mode"
+              aria-label="Palette mode"
             >
               <span className={`
                 absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform duration-200
@@ -72,7 +72,7 @@ export function DitherColorSection() {
 
           {paletteMode && (
             <Select
-              label="palette size"
+              label="Palette size"
               value={String(paletteSize)}
               options={PALETTE_OPTIONS}
               onChange={(v) => set('paletteSize', Number(v))}

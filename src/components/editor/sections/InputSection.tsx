@@ -25,7 +25,7 @@ export function InputSection({
           onClick={onTogglePlayback}
           className="glass-button px-3 py-1 text-xs rounded-full text-zinc-300 transition-all duration-150 active:scale-95"
         >
-          {isPlaying ? '⏸ pause' : '▶ play'}
+          {isPlaying ? '⏸ Pause' : '▶ Play'}
         </button>
         <input
           type="range"
@@ -35,7 +35,7 @@ export function InputSection({
           value={currentTime}
           onChange={(e) => onSeek(Number(e.target.value))}
           className="flex-1"
-          aria-label="seek"
+          aria-label="Seek"
         />
         <span className="text-xs font-mono text-zinc-500 tabular-nums w-10 text-right">
           {currentTime.toFixed(1)}s

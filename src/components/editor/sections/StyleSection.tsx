@@ -23,7 +23,7 @@ export function StyleSection() {
   return (
     <div className="space-y-3">
       <Select
-        label="charset"
+        label="Charset"
         value={charsetId}
         options={CHARSET_OPTIONS}
         onChange={(v) => set('charsetId', v as CharsetId)}
@@ -31,7 +31,7 @@ export function StyleSection() {
 
       {charsetId === 'custom' && (
         <div className="space-y-1">
-          <label className="text-xs text-zinc-400">custom chars (dark → light)</label>
+          <label className="text-xs text-zinc-400">Custom chars (dark → light)</label>
           <input
             type="text"
             value={customCharset}
@@ -43,7 +43,7 @@ export function StyleSection() {
       )}
 
       <div className="flex items-center justify-between">
-        <span className="text-xs text-zinc-400">invert</span>
+        <span className="text-xs text-zinc-400">Invert</span>
         <button
           onClick={() => set('invert', !invert)}
           className={`
@@ -52,7 +52,7 @@ export function StyleSection() {
           `}
           role="switch"
           aria-checked={invert}
-          aria-label="invert"
+          aria-label="Invert"
         >
           <span className={`
             absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform duration-200
@@ -62,21 +62,21 @@ export function StyleSection() {
       </div>
 
       <Slider
-        label="brightness"
+        label="Brightness"
         value={brightness}
         min={-100}
         max={100}
         onChange={(v) => set('brightness', v)}
       />
       <Slider
-        label="contrast"
+        label="Contrast"
         value={contrast}
         min={-100}
         max={100}
         onChange={(v) => set('contrast', v)}
       />
       <Slider
-        label="gamma"
+        label="Gamma"
         value={gamma}
         min={0.1}
         max={3}
@@ -84,7 +84,7 @@ export function StyleSection() {
         onChange={(v) => set('gamma', v)}
       />
       <Slider
-        label="blur"
+        label="Blur"
         value={blur}
         min={0}
         max={10}

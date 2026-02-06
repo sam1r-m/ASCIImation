@@ -76,7 +76,7 @@ export function EditorShell() {
               onClick={() => setShowResetModal(true)}
               className="glass-button px-4 py-2 rounded-xl text-xs font-medium text-zinc-400 transition-all duration-150 hover:-translate-y-px active:translate-y-px"
             >
-              start over
+              Start Over
             </button>
           )}
           <button
@@ -84,7 +84,7 @@ export function EditorShell() {
             className="glass-button-primary px-5 py-2 rounded-xl text-xs font-medium text-white transition-all duration-150 hover:-translate-y-px active:translate-y-px"
           >
             <span className="relative z-10">
-              {meta ? 'replace video' : 'load video'}
+              {meta ? 'Replace Video' : 'Load Video'}
             </span>
           </button>
         </div>
@@ -108,10 +108,10 @@ export function EditorShell() {
       {/* reset modal */}
       <ConfirmModal
         open={showResetModal}
-        title="start over?"
-        description="this will clear the current video and settings."
-        confirmLabel="start over"
-        cancelLabel="cancel"
+        title="Start Over?"
+        description="This will clear the current video and settings."
+        confirmLabel="Start Over"
+        cancelLabel="Cancel"
         onConfirm={handleRestart}
         onCancel={() => setShowResetModal(false)}
       />

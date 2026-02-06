@@ -16,8 +16,8 @@ export function ConfirmModal({
   open,
   title,
   description,
-  confirmLabel = 'confirm',
-  cancelLabel = 'cancel',
+  confirmLabel = 'Confirm',
+  cancelLabel = 'Cancel',
   onConfirm,
   onCancel,
 }: ConfirmModalProps) {
