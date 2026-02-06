@@ -56,7 +56,8 @@ export function PreviewCanvas({ canvasRef, hasVideo }: PreviewCanvasProps) {
             step={0.1}
             value={zoom}
             onChange={(e) => setZoom('zoom', Number(e.target.value))}
-            className="vertical-range"
+            className="vertical-range range-unidirectional"
+            style={{ ['--value-percent' as string]: `${((zoom - 0.5) / 1.5) * 100}%` }}
             aria-label="Zoom"
           />
         </div>

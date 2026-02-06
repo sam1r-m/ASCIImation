@@ -13,6 +13,16 @@ interface SliderProps {
 export function Slider({
   label, value, min, max, step = 1, onChange, suffix = '',
 }: SliderProps) {
+  const isBidirectional = min < 0
+  const valuePercent = ((value - min) / (max - min)) * 100
+  const centerPercent = ((0 - min) / (max - min)) * 100
+  const blueStart = Math.min(centerPercent, valuePercent)
+  const blueEnd = Math.max(centerPercent, valuePercent)
+
+  const style = isBidirectional
+    ? { ['--blue-start' as string]: `${blueStart}%`, ['--blue-end' as string]: `${blueEnd}%` }
+    : { ['--value-percent' as string]: `${valuePercent}%` }
+
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-xs">
@@ -28,7 +38,8 @@ export function Slider({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full"
+        className={`w-full ${isBidirectional ? 'range-bidirectional' : 'range-unidirectional'}`}
+        style={style}
         aria-label={label}
       />
     </div>
