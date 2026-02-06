@@ -67,26 +67,24 @@ export function EditorShell() {
         />
 
         {/* top right controls */}
-        <div className="absolute top-6 right-6 z-20 flex items-center gap-2">
+        <div className="absolute top-6 right-6 z-20 flex flex-col items-end gap-2">
           {error && (
-            <span className="text-xs text-red-400 mr-2">{error}</span>
+            <span className="text-xs text-red-400">{error}</span>
           )}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="glass-button-primary w-[7rem] py-2.5 rounded-full text-sm font-medium text-white transition-all duration-150 hover:-translate-y-px active:translate-y-px"
+          >
+            <span className="relative z-10">Load Video</span>
+          </button>
           {meta && (
             <button
               onClick={() => setShowResetModal(true)}
-              className="glass-button px-4 py-2 rounded-xl text-xs font-medium text-zinc-400 transition-all duration-150 hover:-translate-y-px active:translate-y-px"
+              className="glass-button w-[7rem] py-2.5 rounded-full text-sm font-medium text-zinc-400 transition-all duration-150 hover:-translate-y-px active:translate-y-px"
             >
               Start Over
             </button>
           )}
-          <button
-            onClick={() => fileInputRef.current?.click()}
-            className="glass-button-primary px-5 py-2 rounded-xl text-xs font-medium text-white transition-all duration-150 hover:-translate-y-px active:translate-y-px"
-          >
-            <span className="relative z-10">
-              {meta ? 'Replace Video' : 'Load Video'}
-            </span>
-          </button>
         </div>
 
         <ControlPanel

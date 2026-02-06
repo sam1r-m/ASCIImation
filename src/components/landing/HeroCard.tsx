@@ -65,7 +65,7 @@ export function HeroCard() {
           disabled:opacity-50 disabled:cursor-not-allowed
         "
       >
-        <span className="relative z-10">open editor</span>
+        <span className="relative z-10">Open Editor</span>
       </motion.button>
 
       <div className="mt-10">
@@ -75,7 +75,7 @@ export function HeroCard() {
           rel="noopener noreferrer"
           className="text-[11px] text-zinc-600 hover:text-zinc-400 transition-colors tracking-[0.15em] uppercase"
         >
-          github
+          © 2026 samir
         </a>
       </div>
     </motion.div>

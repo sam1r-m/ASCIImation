@@ -18,7 +18,7 @@ export function EdgesSection() {
   return (
     <div className="space-y-3">
       <Select
-        label="Edge detection"
+        label="Edge Detection"
         value={edgeMode}
         options={EDGE_OPTIONS}
         onChange={(v) => set('edgeMode', v as EdgeMode)}
@@ -41,7 +41,7 @@ export function EdgesSection() {
             onChange={(v) => set('edgeThreshold', v)}
           />
           <Slider
-            label="Edge / luma blend"
+            label="Edge / Luma Blend"
             value={edgeBlend}
             min={0}
             max={100}

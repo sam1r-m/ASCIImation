@@ -14,6 +14,7 @@ export function renderFrame(
   ctx: CanvasRenderingContext2D,
   frame: AsciiFrame,
   colorEnabled: boolean,
+  zoom: number = 1,
 ): void {
   const { width, height } = ctx.canvas
   const { lines, colors, cols, rows } = frame
@@ -45,6 +46,14 @@ export function renderFrame(
   ctx.fillStyle = BG_COLOR
   ctx.fillRect(0, 0, width, height)
 
+  // apply zoom: scale from center
+  const cx = width / 2
+  const cy = height / 2
+  ctx.save()
+  ctx.translate(cx, cy)
+  ctx.scale(zoom, zoom)
+  ctx.translate(-cx, -cy)
+
   if (colorEnabled) {
     // per-cell color rendering
     for (let y = 0; y < rows; y++) {
@@ -62,6 +71,8 @@ export function renderFrame(
       ctx.fillText(lines[y], ox, oy + y * lineH)
     }
   }
+
+  ctx.restore()
 }
 
 // render for export at a specific resolution

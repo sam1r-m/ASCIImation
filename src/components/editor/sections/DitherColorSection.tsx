@@ -31,7 +31,7 @@ export function DitherColorSection() {
       />
 
       <div className="flex items-center justify-between">
-        <span className="text-xs text-zinc-400">Color mode</span>
+        <span className="text-xs text-zinc-400">Color Mode</span>
         <button
           onClick={() => set('colorEnabled', !colorEnabled)}
           className={`
@@ -40,7 +40,7 @@ export function DitherColorSection() {
           `}
           role="switch"
           aria-checked={colorEnabled}
-          aria-label="Color mode"
+          aria-label="Color Mode"
         >
           <span className={`
             absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform duration-200
@@ -52,7 +52,7 @@ export function DitherColorSection() {
       {colorEnabled && (
         <>
           <div className="flex items-center justify-between">
-            <span className="text-xs text-zinc-400">Palette mode</span>
+            <span className="text-xs text-zinc-400">Palette Mode</span>
             <button
               onClick={() => set('paletteMode', !paletteMode)}
               className={`
@@ -61,7 +61,7 @@ export function DitherColorSection() {
               `}
               role="switch"
               aria-checked={paletteMode}
-              aria-label="Palette mode"
+              aria-label="Palette Mode"
             >
               <span className={`
                 absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform duration-200
@@ -72,7 +72,7 @@ export function DitherColorSection() {
 
           {paletteMode && (
             <Select
-              label="Palette size"
+              label="Palette Size"
               value={String(paletteSize)}
               options={PALETTE_OPTIONS}
               onChange={(v) => set('paletteSize', Number(v))}

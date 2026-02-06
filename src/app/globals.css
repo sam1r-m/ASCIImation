@@ -5,6 +5,14 @@
   --font-mono: var(--font-geist-mono), ui-monospace, "Courier New", monospace;
 }
 
+/* ascii blue accent palette */
+:root {
+  --accent-blue: #035da3;
+  --accent-blue-light: #1c6dac;
+  --accent-blue-dark: #024a82;
+  --accent-blue-darker: #023862;
+}
+
 /* scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -63,6 +71,15 @@ input[type="range"]::-moz-range-thumb {
   background: #e4e4e7;
   border-radius: 50%;
   border: none;
+}
+
+/* vertical range (for canvas zoom bar) */
+.vertical-range {
+  width: 100px;
+  height: 20px;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  margin: 0 -40px; /* compensate for rotated width so it stays in flow */
 }
 
 /* vignette */
@@ -136,12 +153,16 @@ input[type="range"]::-moz-range-thumb {
 .glass-button-primary:hover {
   background: rgba(255, 255, 255, 0.11);
   border-color: rgba(255, 255, 255, 0.45);
-  box-shadow: inset 2px 1px 8px rgba(255, 255, 255, 0.28);
+  box-shadow:
+    inset 2px 1px 8px rgba(255, 255, 255, 0.28),
+    0 0 20px rgba(3, 93, 163, 0.25);
 }
 
 .glass-button-primary:active {
   background: rgba(255, 255, 255, 0.05);
-  box-shadow: inset 2px 1px 4px rgba(255, 255, 255, 0.12);
+  box-shadow:
+    inset 2px 1px 4px rgba(255, 255, 255, 0.12),
+    0 0 12px rgba(3, 93, 163, 0.2);
 }
 
 /* secondary */
@@ -173,12 +194,16 @@ input[type="range"]::-moz-range-thumb {
 .glass-button:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.35);
-  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.18);
+  box-shadow:
+    inset 2px 1px 6px rgba(255, 255, 255, 0.18),
+    0 0 16px rgba(3, 93, 163, 0.18);
 }
 
 .glass-button:active {
   background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 2px 1px 4px rgba(255, 255, 255, 0.08);
+  box-shadow:
+    inset 2px 1px 4px rgba(255, 255, 255, 0.08),
+    0 0 10px rgba(3, 93, 163, 0.15);
 }
 
 @keyframes button-shine {
@@ -191,6 +216,59 @@ input[type="range"]::-moz-range-thumb {
     top: 0%;
     left: 70%;
   }
+}
+
+/* non-interactive glass badge/button for stats HUD */
+.glass-badge {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.glass-badge::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  top: 0;
+  left: 0;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotateZ(50deg);
+  filter: blur(24px);
+  animation: button-shine 12s ease infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* same as glass-badge but allows interaction (e.g. zoom bar) */
+.glass-badge-interactive {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10.5px);
+  -webkit-backdrop-filter: blur(10.5px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: inset 2px 1px 6px rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-badge-interactive::after {
+  content: "";
+  position: absolute;
+  width: 150%;
+  top: 0;
+  left: 0;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotateZ(50deg);
+  filter: blur(24px);
+  animation: button-shine 12s ease infinite;
+  pointer-events: none;
+  z-index: -1;
 }
 
 /* modal */

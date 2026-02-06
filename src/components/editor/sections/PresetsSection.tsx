@@ -41,16 +41,16 @@ export function PresetsSection() {
         <button
           onClick={handleRandomize}
           className="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/5 text-zinc-400 hover:bg-white/10 hover:text-zinc-200 transition-all active:scale-95"
-          title="Randomize settings"
+          title="Randomize Settings"
         >
-          🎲 random
+         Randomize
         </button>
         {activePreset && (
           <button
             onClick={handleReset}
             className="px-3 py-1.5 text-xs rounded-full bg-white/5 border border-white/5 text-zinc-400 hover:bg-white/10 hover:text-zinc-200 transition-all active:scale-95"
           >
-            reset
+            Reset
           </button>
         )}
       </div>

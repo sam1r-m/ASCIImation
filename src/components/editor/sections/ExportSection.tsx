@@ -20,14 +20,14 @@ export function ExportSection({
   return (
     <div className="space-y-3">
       <Slider
-        label="Export fps"
+        label="Export FPS"
         value={exportFps}
         min={5}
         max={30}
         onChange={(v) => set('exportFps', v)}
       />
       <Slider
-        label="Max duration"
+        label="Max Duration"
         value={exportDuration}
         min={1}
         max={30}
@@ -86,7 +86,7 @@ export function ExportSection({
 
       {(!canWebm || !canMp4) && (
         <p className="text-xs text-zinc-600">
-          Some formats need MediaRecorder support — greyed out ones aren&apos;t available in your browser
+          Some formats need MediaRecorder support -- Greyed out ones aren&apos;t available in your browser. Sorry!
         </p>
       )}
     </div>

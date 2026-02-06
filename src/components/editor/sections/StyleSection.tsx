@@ -31,7 +31,7 @@ export function StyleSection() {
 
       {charsetId === 'custom' && (
         <div className="space-y-1">
-          <label className="text-xs text-zinc-400">Custom chars (dark → light)</label>
+          <label className="text-xs text-zinc-400">Custom Chars (dark → light)</label>
           <input
             type="text"
             value={customCharset}

@@ -87,7 +87,7 @@ export function useAsciiPipeline(
 
           const displayCtx = canvas.getContext('2d')
           if (displayCtx) {
-            renderFrame(displayCtx, frame, s.colorEnabled)
+            renderFrame(displayCtx, frame, s.colorEnabled, s.zoom)
           }
 
           const renderMs = performance.now() - start
