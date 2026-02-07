@@ -1,6 +1,6 @@
 # ascii-mation
 
-real-time video to ascii converter built with next.js and typescript. upload any video and it gets turned into animated ascii art, frame by frame, with everything running client-side in the browser.
+real-time video to ascii converter built with next.js and typescript. upload any video and it gets turned into animated ascii art, frame by frame, with everything running client-side in the browser. Access at: https://ascii-mation.vercel.app
 
 ## features
 
