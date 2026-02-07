@@ -4,11 +4,14 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, useReducedMotion } from 'framer-motion'
 
-// box-drawing ascii art for the hero
+// block-drawing ascii art for the hero
 const ASCII_TITLE = [
-  '╔═╗ ╔═╗ ╔═╗  ╦   ╦      ╔╦╗ ╔═╗ ╔╦╗  ╦  ╔═╗ ╔╗╔',
-  '╠═╣ ╚═╗ ║    ║   ║   ─  ║║║ ╠═╣  ║   ║  ║ ║ ║║║',
-  '╩ ╩ ╚═╝ ╚═╝  ╩   ╩      ╩ ╩ ╩ ╩  ╩   ╩  ╚═╝ ╝╚╝',
+  '█████╗ ███████╗ ██████╗██╗██╗      ███╗   ███╗ █████╗ ████████╗██╗ ██████╗ ███╗   ██╗',
+  '██╔══██╗██╔════╝██╔════╝██║██║      ████╗ ████║██╔══██╗╚══██╔══╝██║██╔═══██╗████╗  ██║',
+  '███████║███████╗██║     ██║██║█████╗██╔████╔██║███████║   ██║   ██║██║   ██║██╔██╗ ██║',
+  '██╔══██║╚════██║██║     ██║██║╚════╝██║╚██╔╝██║██╔══██║   ██║   ██║██║   ██║██║╚██╗██║',
+  '██║  ██║███████║╚██████╗██║██║      ██║ ╚═╝ ██║██║  ██║   ██║   ██║╚██████╔╝██║ ╚████║',
+  '╚═╝  ╚═╝╚══════╝ ╚═════╝╚═╝╚═╝      ╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝ ╚═════╝ ╚═╝  ╚═══╝',
 ].join('\n')
 
 export function HeroCard() {
@@ -37,20 +40,20 @@ export function HeroCard() {
     >
       {/* ascii art */}
       <motion.pre
-        animate={shouldReduceMotion ? {} : { opacity: [0.25, 0.4, 0.25] }}
+        animate={shouldReduceMotion ? {} : { opacity: [0.45, 0.6, 0.45] }}
         transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-        className="font-mono text-[9px] sm:text-[11px] md:text-sm leading-tight text-white select-none mb-8"
-        style={{ opacity: 0.3 }}
+        className="hero-ascii-art text-[9px] sm:text-[11px] md:text-sm text-white select-none mb-8"
+        style={{ opacity: 0.5 }}
       >
         {ASCII_TITLE}
       </motion.pre>
 
-      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-3">
+      <h1 className="text-4xl md:text-5xl font-[744] tracking-tight text-white mb-3">
         ascii-mation
       </h1>
 
-      <p className="text-zinc-400 text-base md:text-lg tracking-[0.08em] mb-12">
-        real-time video → ascii
+      <p className="text-white/75 text-sm md:text-base tracking-[0.08em] font-mono mb-12">
+        motion, rendered in ASCII
       </p>
 
       {/* cta */}

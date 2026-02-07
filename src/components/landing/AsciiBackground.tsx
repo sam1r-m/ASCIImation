@@ -5,13 +5,36 @@ import { useEffect, useRef } from 'react'
 const CHARSET = ' .:-=+*#'
 const COLS = 80
 const ROWS = 30
-const TARGET_FPS = 10
+const TARGET_FPS = 16
+
+// gradient: dark gray → darker ascii blues (stays in blue range, not too bright)
+const BLUE_GRADIENT = [
+  { r: 18, g: 18, b: 24 },        // 0    dark gray
+  { r: 2, g: 56, b: 98 },         // 0.25 #023862
+  { r: 2, g: 74, b: 130 },        // 0.5  #024a82
+  { r: 3, g: 93, b: 163 },        // 0.75 #035da3
+  { r: 22, g: 95, b: 158 },       // 1    slightly darker #1c6dac
+]
+
+function colorForNorm(norm: number, rowFade: number): string {
+  const i = norm * (BLUE_GRADIENT.length - 1)
+  const lo = Math.floor(Math.min(i, BLUE_GRADIENT.length - 2))
+  const hi = lo + 1
+  const t = Math.min(1, i - lo)
+  const c = BLUE_GRADIENT[lo]
+  const d = BLUE_GRADIENT[hi]
+  const r = Math.round(c.r + (d.r - c.r) * t)
+  const g = Math.round(c.g + (d.g - c.g) * t)
+  const b = Math.round(c.b + (d.b - c.b) * t)
+  const baseAlpha = 0.42 + norm * 0.42
+  const a = baseAlpha * rowFade
+  return `rgba(${r},${g},${b},${a})`
+}
 
 export function AsciiBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    // respect reduced motion
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
     if (mq.matches) return
 
@@ -25,9 +48,15 @@ export function AsciiBackground() {
     let frame = 0
     const interval = 1000 / TARGET_FPS
 
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
     const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      const w = window.innerWidth
+      const h = window.innerHeight
+      canvas.width = w * dpr
+      canvas.height = h * dpr
+      canvas.style.width = `${w}px`
+      canvas.style.height = `${h}px`
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
     }
     resize()
     window.addEventListener('resize', resize)
@@ -40,26 +69,27 @@ export function AsciiBackground() {
       lastTime = time
       frame++
 
-      const { width, height } = canvas
-      ctx.clearRect(0, 0, width, height)
+      const w = window.innerWidth
+      const h = window.innerHeight
+      ctx.clearRect(0, 0, w, h)
 
-      const cellW = width / COLS
-      const cellH = height / ROWS
-      const fontSize = Math.min(cellW, cellH) * 0.8
+      const cellW = w / COLS
+      const cellH = h / ROWS
+      const fontSize = Math.min(cellW, cellH) * 0.92
 
-      ctx.font = `${fontSize}px monospace`
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.55)'
+      ctx.font = `600 ${fontSize}px monospace`
       ctx.textAlign = 'center'
       ctx.textBaseline = 'middle'
 
-      const t = frame * 0.015
+      const t = frame * 0.055
 
       for (let y = 0; y < ROWS; y++) {
+        const rowNorm = y / (ROWS - 1)
+        const rowFade = 1 - rowNorm * 0.82
         for (let x = 0; x < COLS; x++) {
           const nx = x * 0.06
           const ny = y * 0.1
 
-          // layered sine waves → organic movement
           const v1 = Math.sin(nx * 1.2 + t) * Math.cos(ny * 0.8 + t * 0.7)
           const v2 = Math.sin(nx * 0.5 - t * 0.3 + ny * 0.7) * 0.6
           const v3 = Math.cos((nx + ny) * 0.4 + t * 0.2) * 0.4
@@ -70,6 +100,7 @@ export function AsciiBackground() {
           const ch = CHARSET[charIdx]
 
           if (ch !== ' ') {
+            ctx.fillStyle = colorForNorm(norm, rowFade)
             ctx.fillText(ch, x * cellW + cellW / 2, y * cellH + cellH / 2)
           }
         }
@@ -89,11 +120,10 @@ export function AsciiBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
+      className="absolute inset-0 w-full h-full pointer-events-none"
       style={{
-        opacity: 0.12,
-        filter: 'blur(0.7px)',
-        mixBlendMode: 'screen',
+        opacity: 0.65,
+        imageRendering: 'crisp-edges',
       }}
       aria-hidden="true"
     />

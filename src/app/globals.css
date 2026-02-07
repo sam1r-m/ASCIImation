@@ -210,6 +210,13 @@ input[type="range"]::-moz-range-thumb:active {
   margin: 0 -40px; /* compensate for rotated width so it stays in flow */
 }
 
+/* hero ASCII art: straight rows (cell-based font + exact line-height) */
+.hero-ascii-art {
+  font-family: "Courier New", Courier, "Liberation Mono", Consolas, monospace;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
 /* vignette */
 .vignette {
   pointer-events: none;

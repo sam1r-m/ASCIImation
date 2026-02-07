@@ -9,10 +9,7 @@ export default function LandingPage() {
 
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-neutral-900 via-neutral-950 to-black">
-      {/* vignette */}
       <div className="absolute inset-0 z-[1] vignette" />
-
-      {/* ascii bg */}
       <motion.div
         initial={shouldReduceMotion ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -21,11 +18,7 @@ export default function LandingPage() {
       >
         <AsciiBackground />
       </motion.div>
-
-      {/* noise */}
       <div className="absolute inset-0 z-[3] noise-overlay" />
-
-      {/* hero */}
       <HeroCard />
     </main>
   )
