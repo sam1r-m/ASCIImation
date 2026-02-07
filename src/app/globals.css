@@ -13,6 +13,84 @@
   --accent-blue-darker: #023862;
 }
 
+/* preset pills — selected state uses dark blue with transition */
+.preset-pill {
+  transition:
+    background-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.preset-pill[aria-pressed="true"] {
+  background: rgba(2, 56, 98, 0.5) !important;
+  border-color: rgba(2, 74, 130, 0.7) !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  box-shadow: inset 0 1px 0 rgba(28, 109, 172, 0.2) !important;
+}
+
+/* Randomize button — one-shot: blue slides across then off */
+.randomize-button {
+  position: relative;
+  overflow: hidden;
+}
+.randomize-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 56, 98, 0.6) 0%,
+    rgba(2, 74, 130, 0.7) 50%,
+    rgba(3, 93, 163, 0.5) 100%
+  );
+  border-radius: inherit;
+  transform: translateX(-100%);
+  z-index: 0;
+  pointer-events: none;
+}
+.randomize-button span {
+  position: relative;
+  z-index: 1;
+}
+.randomize-button--animating::before {
+  animation: randomize-slide 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.randomize-button--animating {
+  animation: randomize-slide-text 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes randomize-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  40% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes randomize-slide-text {
+  0% {
+    color: rgb(163, 163, 163);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  35% {
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(2, 74, 130, 0.6);
+  }
+  65% {
+    color: rgba(255, 255, 255, 0.95);
+    border-color: rgba(2, 74, 130, 0.6);
+  }
+  100% {
+    color: rgb(163, 163, 163);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+}
+
 /* scrollbar */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
@@ -462,5 +540,8 @@ input[type="range"]::-moz-range-thumb:active {
   .glass-button::after {
     animation: none;
     opacity: 0;
+  }
+  .randomize-button--animating {
+    animation: none !important;
   }
 }

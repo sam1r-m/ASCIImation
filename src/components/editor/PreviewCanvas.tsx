@@ -46,7 +46,7 @@ export function PreviewCanvas({ canvasRef, hasVideo, onTrySampleVideo, sampleVid
           <p className="text-zinc-600 text-sm">Load a video to get started (top right ↗)</p>
           {onTrySampleVideo && (
             <p className="text-zinc-500 text-sm">
-              or try{' '}
+              Or, try{' '}
               <button
                 type="button"
                 onClick={onTrySampleVideo}

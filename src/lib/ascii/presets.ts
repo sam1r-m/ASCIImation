@@ -139,7 +139,7 @@ export const PRESETS: Record<string, PresetConfig> = {
   },
 }
 
-// bounded random preset for the "dice" button
+// bounded random preset for the "Randomize" button
 export function randomPreset(): PresetConfig {
   const charsets: CharsetId[] = ['detailed', 'standard', 'blocks', 'minimal', 'dense']
   const dithers: DitherMode[] = ['none', 'floyd-steinberg', 'bayer', 'atkinson']
