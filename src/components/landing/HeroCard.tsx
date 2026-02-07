@@ -49,7 +49,7 @@ export function HeroCard() {
       </motion.pre>
 
       <h1 className="text-4xl md:text-5xl font-[744] tracking-tight text-white mb-3">
-        ascii-mation
+        
       </h1>
 
       <p className="text-white/75 text-sm md:text-base tracking-[0.08em] font-mono mb-12">
