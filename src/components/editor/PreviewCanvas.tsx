@@ -7,9 +7,11 @@ import { StatsHud } from './StatsHud'
 interface PreviewCanvasProps {
   canvasRef: React.RefObject<HTMLCanvasElement | null>
   hasVideo: boolean
+  onTrySampleVideo?: () => void
+  sampleVideoError?: string | null
 }
 
-export function PreviewCanvas({ canvasRef, hasVideo }: PreviewCanvasProps) {
+export function PreviewCanvas({ canvasRef, hasVideo, onTrySampleVideo, sampleVideoError }: PreviewCanvasProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const zoom = useEditorStore((s) => s.zoom)
   const setZoom = useEditorStore((s) => s.set)
@@ -40,8 +42,24 @@ export function PreviewCanvas({ canvasRef, hasVideo }: PreviewCanvasProps) {
         className="w-full h-full"
       />
       {!hasVideo && (
-        <div className="absolute inset-0 flex items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-center px-4">
           <p className="text-zinc-600 text-sm">Load a video to get started (top right ↗)</p>
+          {onTrySampleVideo && (
+            <p className="text-zinc-500 text-sm">
+              or try{' '}
+              <button
+                type="button"
+                onClick={onTrySampleVideo}
+                className="underline text-zinc-400 hover:text-zinc-300 focus:text-zinc-300 focus:outline-none transition-colors"
+              >
+                this video of a mandelbrot expansion
+              </button>{' '}
+              first
+            </p>
+          )}
+          {sampleVideoError && (
+            <p className="text-red-400/90 text-xs">{sampleVideoError}</p>
+          )}
         </div>
       )}
       <StatsHud />

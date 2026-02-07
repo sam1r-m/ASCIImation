@@ -16,6 +16,7 @@ export function EditorShell() {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const shouldReduceMotion = useReducedMotion()
   const [showResetModal, setShowResetModal] = useState(false)
+  const [sampleVideoError, setSampleVideoError] = useState<string | null>(null)
   // Resolve only on client to avoid hydration mismatch (MediaRecorder is undefined on server)
   const [exportCapabilities, setExportCapabilities] = useState({ canWebm: false, canMp4: false })
   useEffect(() => {
@@ -36,6 +37,19 @@ export function EditorShell() {
     if (file) loadFile(file)
     // let the user re-select the same file
     e.target.value = ''
+  }, [loadFile])
+
+  const handleLoadSampleVideo = useCallback(async () => {
+    setSampleVideoError(null)
+    try {
+      const res = await fetch('/mandelbrot_fractal_zoom.mp4')
+      if (!res.ok) throw new Error('Couldn’t load sample video')
+      const blob = await res.blob()
+      const file = new File([blob], 'mandelbrot_fractal_zoom.mp4', { type: 'video/mp4' })
+      await loadFile(file)
+    } catch (err) {
+      setSampleVideoError(err instanceof Error ? err.message : 'Couldn’t load sample video')
+    }
   }, [loadFile])
 
   const handleRestart = useCallback(() => {
@@ -100,7 +114,12 @@ export function EditorShell() {
           canWebm={exportCapabilities.canWebm}
           canMp4={exportCapabilities.canMp4}
         />
-        <PreviewCanvas canvasRef={canvasRef} hasVideo={!!videoEl} />
+        <PreviewCanvas
+          canvasRef={canvasRef}
+          hasVideo={!!videoEl}
+          onTrySampleVideo={handleLoadSampleVideo}
+          sampleVideoError={sampleVideoError}
+        />
       </motion.div>
 
       {/* reset modal */}
